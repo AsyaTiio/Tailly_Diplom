@@ -72,9 +72,8 @@ export function createProduct(input: ProductMockInput): Product {
 function buildDefaultDeliveryRange(productId: string): ProductDeliveryRange {
   const baseDay = 18;
   const spread = 4;
-  const offset = productId
-    .split('')
-    .reduce((acc, char) => acc + char.charCodeAt(0), 0) % spread;
+  const offset =
+    productId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % spread;
   const fromDay = baseDay + offset;
   const toDay = fromDay + 4;
 
@@ -99,9 +98,9 @@ export function enrichMockProductData(product: Product): Product {
     if (!trimmed) return imagePool[fallbackIndex % imagePool.length]!;
 
     // Legacy mock paths under /images/shop/* no longer exist in public assets.
-    if (trimmed.startsWith('/images/shop/')) {
+    /* if (trimmed.startsWith('/images/shop/')) {
       return imagePool[fallbackIndex % imagePool.length]!;
-    }
+    } */
 
     return trimmed;
   };
@@ -149,7 +148,8 @@ function buildMockCharacteristics(input: ProductMockInput): ProductCharacteristi
 }
 
 function detectForWhom(input: ProductMockInput): string {
-  const source = `${input.categoryTitle} ${input.title} ${input.shortDescription}`.toLowerCase();
+  const source =
+    `${input.categoryTitle} ${input.title} ${input.shortDescription}`.toLowerCase();
 
   if (source.includes('кош')) return 'Кошки';
   if (source.includes('собак')) return 'Собаки';
@@ -237,7 +237,7 @@ export const SHOP_PRODUCTS_MOCK: Product[] = [
       },
       {
         id: 'product-1-image-2',
-        url: '/images/shop/product-cat-food-2.jpg',
+        url: '/images/shop/product-cat-food-1.jpg',
         alt: 'Упаковка корма для кошек',
       },
     ],
@@ -345,7 +345,7 @@ export const SHOP_PRODUCTS_MOCK: Product[] = [
     images: [
       {
         id: 'product-2-image-1',
-        url: '/images/shop/product-dog-toy-1.jpg',
+        url: '/images/shop-photo/product-dog-toy-1.jpg',
         alt: 'Игрушка для собак: канат с мячом',
       },
     ],
